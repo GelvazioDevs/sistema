@@ -103,7 +103,7 @@ function getHtmlModal(pagina) {
                        gap: 5px;
                        background-color: #f0f0f0;">
 
-                    <button id="salvar" class="button green">Entrar</button>
+                    <button id="salvar" class="button green" onclick="window.location.href='index.html'">Entrar</button>
                     <button id="cancelar" class="button blue">Cancelar</button>
                 </footer>
             </form>               
