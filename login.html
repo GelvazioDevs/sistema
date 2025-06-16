@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema Comercial</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,200;1,800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/records.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/menu.css">
+
+    <script src="js/login.js" defer></script>
+</head>
+
+<body onload="loadModalContainer('login')">
+    <nav class="menu" id="menu-sistema" style="display: none;">
+        <ul>
+            <li>
+                <button onclick="toggleDropdown('cadastro')">Cadastro</button>
+                <ul class="dropdown" id="cadastro">
+                    <li onclick="loadModalContainer('cliente')">Clientes</li>
+                    <li onclick="loadModalContainer('produto')">Produtos</li>
+                    <li onclick="loadModalContainer('cidade')">Cidades</li>
+                    <li onclick="loadModalContainer('regiao')">Regiões</li>
+                    <li onclick="loadModalContainer('vendedor')">Vendedores</li>
+                </ul>
+            </li>
+            <li>
+                <button onclick="toggleDropdown('faturamento')">Faturamento</button>
+                <ul class="dropdown" id="faturamento">
+                    <li onclick="loadModalContainer('pedido')">Pedido</li>
+                    <li onclick="loadModalContainer('notaentrada')">Nota de Entrada</li>
+                    <li onclick="loadModalContainer('notavenda')">Nota de Venda</li>
+                </ul>
+            </li>
+            <li>
+                <button onclick="toggleDropdown('financeiro')">Financeiro</button>
+                <ul class="dropdown" id="financeiro">
+                    <li onclick="loadModalContainer('contaspagar')">Contas a Pagar</li>
+                    <li onclick="loadModalContainer('contasreceber')">Contas a Receber</li>
+                    <li onclick="loadModalContainer('baixacontaspagarreceber')">Baixa Contas Pagar/Receber</li>
+                </ul>
+            </li>
+            <li>
+                <button onclick="toggleDropdown('relatorios')">Relatórios</button>
+                <ul class="dropdown" id="relatorios">
+                    <li onclick="loadModalContainer('relatorio_cliente')">Relatorio de Clientes</li>
+                    <li onclick="loadModalContainer('relatorio_produto')">Relatorio de Produtos</li>
+                    <li onclick="loadModalContainer('relatorio_cidade')">Relatorio de Cidades</li>
+                    <li onclick="loadModalContainer('relatorio_regiao')">Relatorio de Regiões</li>
+                    <li onclick="loadModalContainer('relatorio_vendedor')">Relatorio de Vendedores</li>
+                    <li onclick="loadModalContainer('relatorio_comissao')">Relatorio de Comissões Vendedor</li>
+                    <li onclick="loadModalContainer('relatorio_pedido')">Relatorio de Pedido</li>
+                    <li onclick="loadModalContainer('relatorio_nf_entrada')">Relatorio de Nota de Entrada</li>
+                    <li onclick="loadModalContainer('relatorio_nf_venda')">Relatorio de Nota de Venda</li>
+                    <li onclick="loadModalContainer('relatorio_contas_receber')">Relatorio de Contas a Pagar</li>
+                    <li onclick="loadModalContainer('relatorio_contas_pagar')">Relatorio de Contas a Receber</li>
+                    <li onclick="loadModalContainer('relatorio_baixa_receber_pagar')">Relatorio de Baixa Contas Pagar/Receber</li>
+                </ul>
+            </li>
+            <li>
+                <button onclick="toggleDropdown('configuracoes')">Configurações</button>
+                <ul class="dropdown" id="configuracoes">
+                    <li onclick="loadModalContainer('usuario')">Usuários</li>
+                    <li onclick="loadModalContainer('parametro')">Parâmetros</li>
+                    <li onclick="loadModalContainer('taxacomissao')">Taxa de Comissão Vendedor</li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul id="menu-login">
+            <li>
+                <button type="button" class="button blue mobile"
+                 id="login">LOGIN</button>
+            </li>
+            <li>
+                <button type="button" class="button blue mobile" id="logout">LOGOUT</button>
+            </li>            
+        </ul>
+    </nav>
+
+    <div class="container" id="container"></div>
+
+    <footer id="footer">
+        Copyright &copy; Senac - Prof. Gelvazio Camargo
+    </footer>
+
+    <script>
+        function toggleDropdown(id) {
+            // Fecha todos os outros dropdowns
+            document.querySelectorAll('.dropdown').forEach(drop => {
+                if (drop.id !== id) {
+                    drop.classList.remove('show');
+                }
+            });
+
+            // Alterna o dropdown clicado
+            const dropdown = document.getElementById(id);
+            dropdown.classList.toggle('show');
+        }
+
+        // Fecha o dropdown se clicar fora
+        window.onclick = function (event) {
+            if (!event.target.matches('button')) {
+                document.querySelectorAll('.dropdown').forEach(drop => {
+                    drop.classList.remove('show');
+                });
+            }
+        }
+    </script>
+
+<script src="js/modal.js"></script>
+
+</body>
+
+</html>

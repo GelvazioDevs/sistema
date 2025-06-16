@@ -4,25 +4,33 @@ function loadModalContainer(pagina) {
     const container = document.getElementById('container');
     container.innerHTML = '';
 
-    if (pagina !== "cliente") {
+    if ((pagina !== "cliente") && (pagina !== "login")) {
         let pageNotFound = pagina.toUpperCase();
         container.innerHTML = `<h1 class="header-title" 
         id="header-title-info">Página [${pageNotFound}] não encontrada</h1>`;
         return;
     }
 
-    const htmlModal = getHtmlModal(pagina);
-    container.innerHTML = htmlModal;
 
     if (pagina == "cliente") {
+        const htmlModal = getHtmlModal(pagina);
+        container.innerHTML = htmlModal;
+
         // Adiciona o evento de click no botão cadastrar cliente
         loadAcoesCliente();
+    } else if (pagina == "login") {
+        const htmlModal = getHtmlModal(pagina);
+        container.innerHTML = htmlModal;
+
+        // Adiciona o evento de click no botão cadastrar cliente
+        loadAcoesLogin();
     }
 }
 
 function getHtmlModal(pagina) {
-    return (
-        ` <header>
+    if (pagina == "cliente") {
+        return (
+            ` <header>
             <h1 class="header-title" id="title-header">Cadastro de Clientes</h1>
         </header>
         <main>
@@ -63,5 +71,44 @@ function getHtmlModal(pagina) {
             </div>
         </main>
         `
-    );
+        );
+    } else if (pagina == "login") {
+        return (
+            ` <header>
+                    <h1 class="header-title" id="title-header">Login Sistema</h1>
+                </header>
+
+        <main style="text-align: center;width: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;">
+       
+            <form id="form" class="modal-form">
+                <input
+                    style="width:320px;"
+                    type="email" id="email" class="modal-field" placeholder="E-mail do Usuário" required>
+
+                <input type="password" id="nome" data-index="new"
+                class="modal-field" placeholder="Senha do Usuario"
+                    required
+                    style="width:320px;">
+                    <br/>
+
+                <footer class="modal-footer"
+                style="width: 100%;
+                       display: flex;
+                       justify-content: center;
+                       align-items: center;
+                       gap: 5px;
+                       background-color: #f0f0f0;">
+
+                    <button id="salvar" class="button green">Entrar</button>
+                    <button id="cancelar" class="button blue">Cancelar</button>
+                </footer>
+            </form>               
+        </main>
+        `
+        );
+    }
 }
