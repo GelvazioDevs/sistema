@@ -14,13 +14,12 @@ body {
 
 #menu-sistema {
     display: flex;
-    color: var(--text-color);
     justify-content: space-between;
     align-items: center;
-
 }
 
 #menu-login {
+    color: var(--text-color);
     margin-right: 75px;
     display: flex;
     align-items: center;
