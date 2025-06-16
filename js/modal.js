@@ -84,26 +84,32 @@ function getHtmlModal(pagina) {
             justify-content: center;
             align-items: center;">
        
-            <form id="form" class="modal-form">
+            <form id="loginForm" class="modal-form">
                 <input
+                    value="senac@email.com"
                     style="width:320px;"
-                    type="email" id="email" class="modal-field" placeholder="E-mail do Usuário" required>
+                    type="email"
+                    id="email"
+                    class="modal-field"
+                    placeholder="E-mail do Usuário" required>
 
-                <input type="password" id="nome" data-index="new"
-                class="modal-field" placeholder="Senha do Usuario"
+                <input
+                    value="Senac.2025"
+                    type="password" id="password" data-index="new"
+                    class="modal-field" placeholder="Senha do Usuario"
                     required
                     style="width:320px;">
                     <br/>
 
                 <footer class="modal-footer"
-                style="width: 100%;
-                       display: flex;
-                       justify-content: center;
-                       align-items: center;
-                       gap: 5px;
-                       background-color: #f0f0f0;">
+                    style="width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 5px;
+                        background-color: #f0f0f0;">
 
-                    <button id="salvar" class="button green" onclick="window.location.href='index.html'">Entrar</button>
+                    <input type="submit" id="entrar" class="button green" value="Entrar"  id="salvar" class="button green">
                     <button id="cancelar" class="button blue">Cancelar</button>
                 </footer>
             </form>               

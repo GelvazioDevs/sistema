@@ -125,24 +125,32 @@ const editDelete = (event) => {
     }
 }
 
-function loadAcoesCliente() {
+function loadAcoesLogin() {
     
-    updateTable();
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+        e.preventDefault();
 
-    // Eventos
-    document.getElementById('cadastrarCliente')
-        .addEventListener('click', openModal)
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
 
-    document.getElementById('modalClose')
-        .addEventListener('click', closeModal)
+        fetch(`http://localhost:3333/users?email=${email}&password=${password}`)
+            .then(response => response.json())
+            .then(users => {
+                const message = document.getElementById('message');
 
-    document.getElementById('salvar')
-        .addEventListener('click', saveClient)
-
-    document.querySelector('#tableClient>tbody')
-        .addEventListener('click', editDelete)
-
-    document.getElementById('cancelar')
-        .addEventListener('click', closeModal)
+                if (users.length > 0) {
+                    message.style.color = 'green';
+                    message.textContent = 'Login bem-sucedido! ✅';
+                    // Aqui você pode redirecionar ou fazer outra ação
+                    window.location.href = 'index.html'; // Redireciona para a página principal
+                } else {
+                    message.style.color = 'red';
+                    message.textContent = 'Usuário ou senha inválidos ❌';
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao conectar com o servidor:', error);
+                document.getElementById('message').textContent = 'Erro ao conectar ao servidor.';
+            });
+    });
 }
-

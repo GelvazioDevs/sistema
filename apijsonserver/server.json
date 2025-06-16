@@ -1,0 +1,12 @@
+{
+  "tarefas": [
+    { "id": 1, "titulo": "Comprar leite", "concluida": false },
+    { "id": 2, "titulo": "Pagar contas", "concluida": false },
+    { "id": 3, "titulo": "Estudar programação", "concluida": true }
+  ],
+    "usuarios": [
+    { "id": 1, "email": "admin@email.com", "senha": "123456" },
+    { "id": 2, "email": "loja@email.com", "senha": "123456" },
+    { "id": 3, "email": "fabrica@email.com", "senha": "123456" }
+  ]
+}
