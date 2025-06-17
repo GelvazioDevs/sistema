@@ -94,14 +94,14 @@ const clearTable = () => {
 }
 
 const updateTable = async () => {
-    const response = await fetch(`http://localhost:3333/clientes`);
-    var db_client = await response.json();
+    const response = await fetch(`http://localhost:3333/produto`);
+    var database = await response.json();
 
-    console.log("clientes: ");
-    console.log(db_client);
+    console.log("produtos: ");
+    console.log(database);
     clearTable();
     
-    await db_client.forEach(createRow)
+    await database.forEach(createRow)
 
 }
 

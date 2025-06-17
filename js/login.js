@@ -8,7 +8,6 @@ const closeModal = () => {
     document.getElementById('modal').classList.remove('active')
 }
 
-
 const getLocalStorage = () => JSON.parse(localStorage.getItem('db_client')) ?? []
 const setLocalStorage = (dbClient) => localStorage.setItem("db_client", JSON.stringify(dbClient))
 
@@ -133,11 +132,10 @@ function loadAcoesLogin() {
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
 
-        fetch(`http://localhost:3333/users?email=${email}&password=${password}`)
+        fetch(`http://localhost:3333/users?email=${email}&pass=${password}`)
             .then(response => response.json())
             .then(users => {
                 const message = document.getElementById('message');
-
                 if (users.length > 0) {
                     message.style.color = 'green';
                     message.textContent = 'Login bem-sucedido! ✅';
