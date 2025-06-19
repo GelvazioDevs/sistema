@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBGE</title>
+    <link rel="stylesheet" href="css/ibge.css">
+</head>
+<body>
+
+    <ul id="estados1">
+        <li><button id="btnEstados">Estados</button></li>
+    </ul>
+
+    <main class="container">
+        <div id="estados"></div>
+    </main>
+
+    <script src="js/core/apiService.js" defer></script>
+
+    <script>
+        document.getElementById('btnEstados').addEventListener('click', async () => {
+            const estados = await apiIBGE.get('localidades/estados');
+            // console.log(estados);
+
+            document.getElementById('estados').innerHTML = estados.map(estado =>
+             `<li>${estado.nome} => 
+                <button id="btnCidades-${estado.id}" onclick="getCidades(${estado.id})">Cidades</button>
+                <select id="cidades_${estado.id}"></select>
+                </li>`).join('');
+        });
+
+
+        async function getCidades (estadoId) {
+            const cidades = await apiIBGE.get(`localidades/estados/${estadoId}/municipios`);
+            console.log(cidades);
+            document.getElementById('cidades_'+estadoId).innerHTML = cidades.map(cidade => 
+            `<option value="${cidade.id}">${cidade.nome}</option>`).join('');
+        }
+
+    </script>
+</body>
+</html>

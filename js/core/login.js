@@ -2,13 +2,13 @@
 
 function loadAcoesLogin() {
     
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
         e.preventDefault();
 
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
 
-        const users = api.get(`users?email=${email}&pass=${password}`)
+        const users = await api.get(`users?email=${email}&pass=${password}`)
         console.log(users)
 
         const message = document.getElementById('message');
