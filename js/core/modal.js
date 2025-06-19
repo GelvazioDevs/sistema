@@ -4,13 +4,6 @@ function loadModalContainer(pagina) {
     const container = document.getElementById('container');
     container.innerHTML = '';
 
-    if ((pagina !== "clientes") && (pagina !== "login")) {
-        let pageNotFound = pagina.toUpperCase();
-        container.innerHTML = `<h1 class="header-title" 
-        id="header-title-info">Página [${pageNotFound}] não encontrada</h1>`;
-        return;
-    }
-
     if (pagina == "login") {
         const htmlModal = getHtmlModalLogin();
         container.innerHTML = htmlModal;
@@ -69,12 +62,15 @@ function getHtmlModalLogin() {
 }
 
 function getHtmlPagina(pagina) {
+    // <header>
+    //     <span class="header-title" id="title-header">Cadastro de ${pagina}</span>
+    // </header>
     return (
-            `<header>
-                <h1 class="header-title" id="title-header">Cadastro de ${pagina}</h1>
-            </header>    
+        `   
             <main>
-                <button type="button" class="button blue mobile" id="cadastrarRegistro">Cadastrar ${pagina}</button>                
+            <div class="acoesConsulta">
+                <button type="button" class="button blue mobile" id="cadastrarRegistro">Cadastrar ${pagina}</button>
+            </div>
                 ${getHtmlConsultaPagina(pagina)}
                 ${getHtmlModalCadastro(pagina)}
             </main>    

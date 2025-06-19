@@ -1,5 +1,5 @@
 const deleteRegister = async (id, rota) => {
-    await api.delete(`${rota}/${id}`);
+    await api.delete(rota, id);
     updateTable(rota);    
 }
 
