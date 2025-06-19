@@ -70,6 +70,7 @@ function getHtmlPagina(pagina) {
             <main>
             <div class="acoesConsulta">
                 <button type="button" class="button blue mobile" id="cadastrarRegistro">Cadastrar ${pagina}</button>
+                <span class="header-title" id="title-header">Cadastro de ${pagina}</span>
             </div>
                 ${getHtmlConsultaPagina(pagina)}
                 ${getHtmlModalCadastro(pagina)}

@@ -101,29 +101,19 @@
 .acoesConsulta {
     display: flex;
     width: 100%;
-    /* background-color: #FF4949; */
-    justify-content: space-around;
-    flex-direction: column;
+    justify-content: space-between;
     color: aliceblue;
-    /* align-items: center; */
-    /* padding: 10px;
-    background-color: #f0f0f0;
-    border-bottom: 1px solid #ccc;
-    border-top: 1px solid #ccc; */
 }
 
-.acoesConsulta > header > span {
-    text-align: center;
+.acoesConsulta > span {
     font-size: 1.5rem;
     font-weight: bold;
-    color: aliceblue;
-    display: none;
-}
+    margin-right: 40%;
+} 
 
 .acoesConsulta > button {
     width: 160px;
     height: 40px;
-    /* background-color: #FF4949; */
     color: aliceblue;
     border: none;
     border-radius: 5px;
