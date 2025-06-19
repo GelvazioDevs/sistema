@@ -39,6 +39,7 @@ function getHtmlModal(pagina) {
             <table id="tableClient" class="records">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Nome</th>
                         <th>E-mail</th>
                         <th>Celular</th>
@@ -56,11 +57,13 @@ function getHtmlModal(pagina) {
                         <span class="modal-close" id="modalClose">&#10006;</span>
                     </header>
                     <form id="form" class="modal-form">
-                        <input type="text" id="nome" data-index="new" class="modal-field" placeholder="Nome do Cliente"
+                        <input type="hidden" id="id">
+                        
+                        <input value="João da Silva" type="text" id="nome" data-index="new" class="modal-field" placeholder="Nome do Cliente"
                             required>
-                        <input type="email" id="email" class="modal-field" placeholder="e-mail do Cliente" required>
-                        <input type="text" id="celular" class="modal-field" placeholder="Celular do Cliente" required>
-                        <input type="text" id="cidade" class="modal-field" placeholder="Cidade do Cliente" required>
+                        <input value="senac@email.com" type="email" id="email" class="modal-field" placeholder="e-mail do Cliente" required>
+                        <input value="1234567890" type="text" id="celular" class="modal-field" placeholder="Celular do Cliente" required>
+                        <input value="São Paulo" type="text" id="cidade" class="modal-field" placeholder="Cidade do Cliente" required>
                     </form>
 
                     <footer class="modal-footer">

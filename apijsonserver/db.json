@@ -46,10 +46,24 @@
     },
     {
       "id": "2",
-      "name": "Leanne Graham 2",
+      "name": "maria",
       "email": "Sincere@april.biz",
       "celular": "47988631515",
-      "cidade": "RIO DO SUL"
+      "cidade": "RIO DO SUL48"
+    },
+    {
+      "id": "3",
+      "name": "João da Silva",
+      "email": "senac@email.com",
+      "celular": "1234567890",
+      "cidade": "São Paulo"
+    },
+    {
+      "id": "4",
+      "name": "João da Silva",
+      "email": "senac@email.com",
+      "celular": "1234567890",
+      "cidade": "São Paulo"
     }
   ],
   "produtos": [
