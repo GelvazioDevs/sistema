@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+</head>
+<body>
+    <nav class="menu" id="menu-sistema">
+
+        <style>
+            .pedidos {
+                padding: 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .pedidos h1 {
+                color: #333;
+                margin-bottom: 20px;
+                font-size: 24px;
+            }
+
+            .button {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 14px;
+                transition: all 0.3s ease;
+            }
+
+            .button.blue {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .button.blue:hover {
+                background-color: #0056b3;
+            }
+
+            /* Estilo do Modal */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.5);
+            }
+
+            .modal-content {
+                background-color: #fefefe;
+                margin: 5% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 800px;
+                border-radius: 8px;
+            }
+
+            .modal-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+            }
+
+            .modal-header h2 {
+                margin: 0;
+                color: #333;
+            }
+
+            .close {
+                color: #aaa;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .close:hover {
+                color: #333;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+                color: #555;
+            }
+
+            .form-group input,
+            .form-group select {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            #tabela-produtos {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            #tabela-produtos th,
+            #tabela-produtos td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            #tabela-produtos th {
+                background-color: #f5f5f5;
+            }
+
+            .modal button {
+                padding: 8px 15px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 14px;
+                margin: 5px;
+            }
+
+            .modal button.blue {
+                background-color: #007bff;
+                color: white;
+            }
+
+            .modal button.blue:hover {
+                background-color: #0056b3;
+            }
+
+            .modal button.red {
+                background-color: #dc3545;
+                color: white;
+            }
+
+            .modal button.red:hover {
+                background-color: #c82333;
+            }
+
+            .modal button:disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
+
+            .modal button:hover {
+                opacity: 0.8;
+                transition: opacity 0.3s ease;
+            }
+
+            body {
+                background: #3F5EFB;
+                background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+                min-height: 100vh;
+                margin: 0;
+                padding: 0;
+            }
+
+            .modal {
+                background: radial-gradient(circle, rgba(142, 161, 252, 1) 0%, rgba(253, 134, 158, 1) 100%);
+            }
+
+            .modal-content {
+                background: radial-gradient(circle, rgba(157, 173, 252, 1) 0%, rgba(253, 155, 174, 1) 100%);
+            }
+        </style>
+        <div class="pedidos">
+            <h1>Pedidos</h1>
+
+            <button onclick="document.getElementById('modal-pedidos').style.display='block'" class="button blue mobile">Novo Pedido</button>
+            <!-- Modal de Pedidos -->
+            <div id="modal-pedidos" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Cadastro de Pedido</h2>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-pedido">
+                            <div class="form-group">
+                                <label for="cliente">Cliente:</label>
+                                <select id="cliente" name="cliente" required>
+                                    <option value="">Selecione o cliente</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="vendedor">Vendedor:</label>
+                                <select id="vendedor" name="vendedor" required>
+                                    <option value="">Selecione o vendedor</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="data_pedido">Data do Pedido:</label>
+                                <input type="date" id="data_pedido" name="data_pedido" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="codigo_produto">Código do Produto:</label>
+                                <input type="text" id="codigo_produto" name="codigo_produto">
+                                <button type="button" onclick="adicionarProduto()">Adicionar Produto</button>
+                            </div>
+
+                            <table id="tabela-produtos">
+                                <thead>
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Descrição</th>
+                                        <th>Quantidade</th>
+                                        <th>Valor Unitário</th>
+                                        <th>Total</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="produtos-pedido">
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">Total do Pedido:</td>
+                                        <td id="total-pedido">R$ 0,00</td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            <div class="form-actions">
+                                <button type="submit">Salvar Pedido</button>
+                                <button type="button" onclick="fecharModal()">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // Função para carregar clientes e vendedores ao abrir o modal
+                async function carregarDadosIniciais() {
+                    try {
+                        const clientes = await supabase.from('clientes').select('*');
+                        const vendedores = await supabase.from('vendedores').select('*');
+
+                        const selectCliente = document.getElementById('cliente');
+                        const selectVendedor = document.getElementById('vendedor');
+
+                        clientes.data.forEach(cliente => {
+                            const option = document.createElement('option');
+                            option.value = cliente.id;
+                            option.textContent = cliente.nome;
+                            selectCliente.appendChild(option);
+                        });
+
+                        vendedores.data.forEach(vendedor => {
+                            const option = document.createElement('option');
+                            option.value = vendedor.id;
+                            option.textContent = vendedor.nome;
+                            selectVendedor.appendChild(option);
+                        });
+                    } catch (error) {
+                        console.error('Erro ao carregar dados:', error);
+                    }
+                }
+
+                // Função para adicionar produto na tabela
+                async function adicionarProduto() {
+                    const codigoProduto = document.getElementById('codigo_produto').value;
+                    
+                    try {
+                        const { data: produto, error } = await supabase
+                            .from('produtos')
+                            .select('*')
+                            .eq('codigo', codigoProduto)
+                            .single();
+
+                        if (error) throw error;
+
+                        if (produto) {
+                            const tbody = document.getElementById('produtos-pedido');
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${produto.codigo}</td>
+                                <td>${produto.descricao}</td>
+                                <td><input type="number" value="1" onchange="atualizarTotal(this)" min="1"></td>
+                                <td>R$ ${produto.preco_venda}</td>
+                                <td>R$ ${produto.preco_venda}</td>
+                                <td><button type="button" onclick="removerProduto(this)">Excluir</button></td>
+                                <input type="hidden" value="${produto.id}">
+                            `;
+                            tbody.appendChild(tr);
+                            atualizarTotalPedido();
+                        } else {
+                            alert('Produto não encontrado!');
+                        }
+                        
+                        document.getElementById('codigo_produto').value = '';
+                    } catch (error) {
+                        console.error('Erro ao buscar produto:', error);
+                        alert('Erro ao buscar produto');
+                    }
+                }
+
+                // Função para remover produto da tabela
+                function removerProduto(button) {
+                    const row = button.closest('tr');
+                    row.remove();
+                    atualizarTotalPedido();
+                }
+
+                // Função para atualizar total da linha
+                function atualizarTotal(input) {
+                    const row = input.closest('tr');
+                    const quantidade = input.value;
+                    const valorUnitario = parseFloat(row.cells[3].textContent.replace('R$ ', ''));
+                    const total = quantidade * valorUnitario;
+                    row.cells[4].textContent = `R$ ${total.toFixed(2)}`;
+                    atualizarTotalPedido();
+                }
+
+                // Função para atualizar total do pedido
+                function atualizarTotalPedido() {
+                    const linhas = document.querySelectorAll('#produtos-pedido tr');
+                    let total = 0;
+                    
+                    linhas.forEach(linha => {
+                        const valorStr = linha.cells[4].textContent.replace('R$ ', '');
+                        total += parseFloat(valorStr);
+                    });
+
+                    document.getElementById('total-pedido').textContent = `R$ ${total.toFixed(2)}`;
+                }
+
+                // Função para salvar pedido
+                async function salvarPedido(event) {
+                    event.preventDefault();
+
+                    const cliente_id = document.getElementById('cliente').value;
+                    const vendedor_id = document.getElementById('vendedor').value;
+                    const data_pedido = document.getElementById('data_pedido').value;
+                    const produtos = [];
+                    
+                    document.querySelectorAll('#produtos-pedido tr').forEach(linha => {
+                        produtos.push({
+                            produto_id: linha.querySelector('input[type="hidden"]').value,
+                            quantidade: linha.querySelector('input[type="number"]').value,
+                            valor_unitario: parseFloat(linha.cells[3].textContent.replace('R$ ', '')),
+                            valor_total: parseFloat(linha.cells[4].textContent.replace('R$ ', ''))
+                        });
+                    });
+
+                    try {
+                        // Inserir pedido
+                        const { data: pedido, error: pedidoError } = await supabase
+                            .from('pedidos')
+                            .insert([{
+                                cliente_id,
+                                vendedor_id,
+                                data_pedido,
+                                valor_total: parseFloat(document.getElementById('total-pedido').textContent.replace('R$ ', ''))
+                            }])
+                            .select()
+                            .single();
+
+                        if (pedidoError) throw pedidoError;
+
+                        // Inserir itens do pedido
+                        const itensPedido = produtos.map(produto => ({
+                            pedido_id: pedido.id,
+                            produto_id: produto.produto_id,
+                            quantidade: produto.quantidade,
+                            valor_unitario: produto.valor_unitario,
+                            valor_total: produto.valor_total
+                        }));
+
+                        const { error: itensError } = await supabase
+                            .from('itens_pedido')
+                            .insert(itensPedido);
+
+                        if (itensError) throw itensError;
+
+                        alert('Pedido salvo com sucesso!');
+                        fecharModal();
+                    } catch (error) {
+                        console.error('Erro ao salvar pedido:', error);
+                        alert('Erro ao salvar pedido');
+                    }
+                }
+
+                // Função para fechar modal
+                function fecharModal() {
+                    document.getElementById('modal-pedidos').style.display = 'none';
+                }
+
+                // Event Listeners
+                document.getElementById('form-pedido').addEventListener('submit', salvarPedido);
+                document.querySelector('.close').addEventListener('click', fecharModal);
+            </script>
+        </div>
+
+
+
+        <ul>
+            <li>
+                <button onclick="toggleDropdown('cadastro')">Cadastro</button>
+                <ul class="dropdown" id="cadastro">
+                    <li onclick="loadModalContainer('clientes')">Clientes</li>
+                    <li onclick="loadModalContainer('produto')">Produtos</li>
+                    <li onclick="loadModalContainer('cidade')">Cidades</li>
+                    <li onclick="loadModalContainer('regiao')">Regiões</li>
+                    <li onclick="loadModalContainer('vendedor')">Vendedores</li>
+                </ul>
+            </li>
+            <li>
+                <button onclick="toggleDropdown('faturamento')">Faturamento</button>
+                <ul class="dropdown" id="faturamento">
+                    <li onclick="loadModalContainer('pedido')">Pedido</li>
+                    <li onclick="loadModalContainer('notaentrada')">Nota de Entrada</li>
+                    <li onclick="loadModalContainer('notavenda')">Nota de Venda</li>
+                </ul>
+            </li>
+            <li>
+                <button onclick="toggleDropdown('financeiro')">Financeiro</button>
+                <ul class="dropdown" id="financeiro">
+                    <li onclick="loadModalContainer('contaspagar')">Contas a Pagar</li>
+                    <li onclick="loadModalContainer('contasreceber')">Contas a Receber</li>
+                    <li onclick="loadModalContainer('baixacontaspagarreceber')">Baixa Contas Pagar/Receber</li>
+                </ul>
+            </li>
+            <li>
+                <button onclick="toggleDropdown('relatorios')">Relatórios</button>
+                <ul class="dropdown" id="relatorios">
+                    <li onclick="loadModalContainer('relatorio_cliente')">Relatorio de Clientes</li>
+                    <li onclick="loadModalContainer('relatorio_produto')">Relatorio de Produtos</li>
+                    <li onclick="loadModalContainer('relatorio_cidade')">Relatorio de Cidades</li>
+                    <li onclick="loadModalContainer('relatorio_regiao')">Relatorio de Regiões</li>
+                    <li onclick="loadModalContainer('relatorio_vendedor')">Relatorio de Vendedores</li>
+                    <li onclick="loadModalContainer('relatorio_comissao')">Relatorio de Comissões Vendedor</li>
+                    <li onclick="loadModalContainer('relatorio_pedido')">Relatorio de Pedido</li>
+                    <li onclick="loadModalContainer('relatorio_nf_entrada')">Relatorio de Nota de Entrada</li>
+                    <li onclick="loadModalContainer('relatorio_nf_venda')">Relatorio de Nota de Venda</li>
+                    <li onclick="loadModalContainer('relatorio_contas_receber')">Relatorio de Contas a Pagar</li>
+                    <li onclick="loadModalContainer('relatorio_contas_pagar')">Relatorio de Contas a Receber</li>
+                    <li onclick="loadModalContainer('relatorio_baixa_receber_pagar')">Relatorio de Baixa Contas Pagar/Receber</li>
+                </ul>
+            </li>
+            <li>
+                <button onclick="toggleDropdown('configuracoes')">Configurações</button>
+                <ul class="dropdown" id="configuracoes">
+                    <li onclick="loadModalContainer('usuario')">Usuários</li>
+                    <li onclick="loadModalContainer('parametro')">Parâmetros</li>
+                    <li onclick="loadModalContainer('taxacomissao')">Taxa de Comissão Vendedor</li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul id="menu-login">
+            <li>
+                <button type="button" class="button blue mobile"
+                 id="login" onclick="window.location.href='login.html'">LOGIN</button>
+            </li>
+            <li>
+                <button type="button" class="button blue mobile" id="logout" onclick="window.location.href='login.html'">LOGOUT</button>
+            </li>            
+        </ul>
+    </nav>
+</body>
+</html>

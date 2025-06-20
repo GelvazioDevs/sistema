@@ -21,7 +21,7 @@
     <script>
         document.getElementById('btnEstados').addEventListener('click', async () => {
             const estados = await apiIBGE.get('localidades/estados');
-            // console.log(estados);
+            console.log(estados);
 
             document.getElementById('estados').innerHTML = estados.map(estado =>
              `<li>${estado.nome} => 
