@@ -62,9 +62,6 @@ function getHtmlModalLogin() {
 }
 
 function getHtmlPagina(pagina) {
-    // <header>
-    //     <span class="header-title" id="title-header">Cadastro de ${pagina}</span>
-    // </header>
     return (
         `   
             <main>
