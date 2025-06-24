@@ -34,6 +34,13 @@
       "username": "senac",
       "email": "senac@email.com",
       "pass": "Senac.2025"
+    },
+    {
+      "id": "6",
+      "name": "Gelvazio Camargo",
+      "username": "senac",
+      "email": "senac@email.com",
+      "pass": "Senac.2025"
     }
   ],
   "clientes": [
