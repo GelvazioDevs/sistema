@@ -7,12 +7,19 @@ function loadAcoesLogin() {
 
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
+        if (!email || !password) {
+            message.style.color = 'red';
+            message.textContent = 'Por favor, preencha todos os campos. ❌';
+            return;
+        }
 
-        const users = await api.get(`users?email=${email}&pass=${password}`)
-        console.log(users)
+        debugger;
+
+        const users = await api.post('login', { email, password });
 
         const message = document.getElementById('message');
         if (users.length > 0) {
+            localStorage.setItem('user', JSON.stringify(users[0]));
             message.style.color = 'green';
             message.textContent = 'Login bem-sucedido! ✅';
             // Aqui você pode redirecionar ou fazer outra ação
