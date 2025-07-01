@@ -15,8 +15,7 @@ function loadAcoesLogin() {
             message.textContent = 'Por favor, preencha todos os campos. ❌';
             return;
         }
-
-     
+        // Verifica se o email é válido     
         const users = await api.post('login', { email, password });
         // Verifica se o usuário foi encontrado
         if(users.mensagem !== undefined) {
